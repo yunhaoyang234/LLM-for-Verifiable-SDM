@@ -1,4 +1,5 @@
+LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)
 
-LTLSPEC NAME safety := G( action=turn_left -> (left_turn_light in {flashing, green}) );
+LTLSPEC NAME spec2 := G ((Car_Observed | Pedestrian_Observed) -> X(Action = Stop));
 
-LTLSPEC NAME liveness := G( F action=turn_left );
+LTLSPEC NAME spec3 := G (Action = Move_forward -> (!Car_Observed & !Pedestrian_Observed))

@@ -2,8 +2,6 @@ import os
 import argparse
 
 def model_checking(automaton_path, spec_path):
-    os.system('rm -rf NuSMV/temp')
-    os.system('mkdir NuSMV/temp')
     spec_file = open(spec_path)
     specs = []
     while True:
@@ -12,7 +10,20 @@ def model_checking(automaton_path, spec_path):
             specs.append(spec)
         if len(spec) == 0:
             break
-    command = 'read_model -i '+automaton_path+'\ngo\n'
+    spec_file.close()
+
+    # merge automaton and spec to one file
+    f_a_s = open('NuSMV/temp/verif.smv', 'x')
+    f_a = open(automaton_path)
+    f_s = open(spec_path)
+    aut = f_a.read() + '\n\n'
+    spc = f_s.read()
+    f_a_s.write(aut + spc)
+    f_a.close()
+    f_s.close()
+    f_a_s.close()
+    
+    command = 'read_model -i NuSMV/temp/verif.smv \ngo\n'
     idx = 1
     for spec in specs:
         name = '\"' + spec.split(' ')[2] + '\"'
@@ -45,7 +56,7 @@ def show_stats():
     print('====================================================' + '\n\n')
 
 def main():
-    automaton_path = 'examples/sample_fsa.smv'
+    automaton_path = 'NuSMV/temp/task.smv'
     spec_path = 'examples/sample_ltl.txt'
     model_checking(automaton_path, spec_path)
     show_stats()

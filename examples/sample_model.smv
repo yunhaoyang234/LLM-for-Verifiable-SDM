@@ -1,0 +1,19 @@
+
+MODULE main
+VAR
+  Pedestrian_Observed : boolean;
+  Car_Observed : boolean;
+  Action : {Stop, Move_forward, Turn_left, Turn_right};
+
+ASSIGN
+  init(Car_Observed) := FALSE;
+  next(Car_Observed) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Pedestrian_Observed) := FALSE;
+  next(Pedestrian_Observed) :=
+    case
+      TRUE : {TRUE, FALSE};
+    esac;

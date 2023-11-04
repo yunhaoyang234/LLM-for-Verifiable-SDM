@@ -1,0 +1,33 @@
+
+MODULE main
+VAR
+  Pedestrian_Observed : boolean;
+  Car_Observed : boolean;
+  Action : {Stop, Move_forward, Turn_left, Turn_right};
+
+ASSIGN
+  init(Car_Observed) := FALSE;
+  next(Car_Observed) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Pedestrian_Observed) := FALSE;
+  next(Pedestrian_Observed) :=
+    case
+      TRUE : {TRUE, FALSE};
+    esac;
+
+  init(Action) := Stop;
+  next(Action) :=
+    case
+      Pedestrian_Observed : Stop;
+      Car_Observed : Stop;
+      !Pedestrian_Observed & !Car_Observed : Move_forward;
+    esac;
+
+LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)
+
+LTLSPEC NAME spec2 := G ((Car_Observed | Pedestrian_Observed) -> X(Action = Stop));
+
+LTLSPEC NAME spec3 := G (Action = Move_forward -> (!Car_Observed & !Pedestrian_Observed))
