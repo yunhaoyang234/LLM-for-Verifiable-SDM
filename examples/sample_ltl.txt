@@ -1,0 +1,4 @@
+
+LTLSPEC NAME safety := G( action=turn_left -> (left_turn_light in {flashing, green}) );
+
+LTLSPEC NAME liveness := G( F action=turn_left );

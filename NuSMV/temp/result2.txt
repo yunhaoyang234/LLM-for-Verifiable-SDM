@@ -1,0 +1,17 @@
+-- specification  G ( F action = turn_left)  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 2.1 <-
+    traffic_light = green
+    left_turn_light = flashing
+    opposite_car = no
+    pedestrian_crossing = yes
+    action = approach
+  -- Loop starts here
+  -> State: 2.2 <-
+    traffic_light = red
+    left_turn_light = off
+    opposite_car = yes
+    action = wait
+  -> State: 2.3 <-

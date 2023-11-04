@@ -1,0 +1,25 @@
+
+MODULE main
+VAR
+  traffic_light : {red, green};
+  left_turn_light : {off, flashing, green};
+  opposite_car : {yes, no};
+  pedestrian_crossing : {yes, no};
+  action : {approach, wait, turn_left};
+
+ASSIGN
+  init(action) := approach;
+  next(action) :=
+    case
+      action = approach & traffic_light = red : wait;
+      action = approach & traffic_light = green & left_turn_light = off : wait;
+      action = approach & traffic_light = green & left_turn_light in {flashing, green} & opposite_car = yes : wait;
+      action = approach & traffic_light = green & left_turn_light in {flashing, green} & opposite_car = no & pedestrian_crossing = yes : wait;
+      action = approach & traffic_light = green & left_turn_light in {flashing, green} & opposite_car = no & pedestrian_crossing = no : turn_left;
+      TRUE : action;
+    esac;
+LTLSPEC NAME safety :=
+    G( action=turn_left -> (left_turn_light in {flashing, green}) );
+
+LTLSPEC NAME liveness :=
+    G( F action=turn_left );
