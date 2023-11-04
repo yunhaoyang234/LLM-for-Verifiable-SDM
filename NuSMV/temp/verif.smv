@@ -23,7 +23,8 @@ ASSIGN
     case
       Pedestrian_Observed : Stop;
       Car_Observed : Stop;
-      !Pedestrian_Observed & !Car_Observed : Move_forward;
+      !Pedestrian_Observed & !Car_Observed : Turn_left;
+      TRUE : Action;
     esac;
 
 LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)

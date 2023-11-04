@@ -23,5 +23,6 @@ ASSIGN
     case
       Pedestrian_Observed : Stop;
       Car_Observed : Stop;
-      !Pedestrian_Observed & !Car_Observed : Move_forward;
+      !Pedestrian_Observed & !Car_Observed : Turn_left;
+      TRUE : Action;
     esac;
