@@ -3,7 +3,9 @@ MODULE main
 VAR
   Pedestrian_Observed : boolean;
   Car_Observed : boolean;
-  Action : {Stop, Move_forward, Turn_left, Turn_right};
+  Stop_Sign_Observed: boolean;
+  Chair: boolean;
+  Action : {Stop, Move_forward, Turn_left, Turn_right, Approach_stop_sign};
 
 ASSIGN
   init(Car_Observed) := FALSE;
@@ -16,4 +18,16 @@ ASSIGN
   next(Pedestrian_Observed) :=
     case
       TRUE : {TRUE, FALSE};
+    esac;
+
+  init(Stop_Sign_Observed) := FALSE;
+  next(Stop_Sign_Observed) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Chair) := FALSE;
+  next(Chair) :=
+    case
+      TRUE: {TRUE, FALSE};
     esac;

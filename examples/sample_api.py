@@ -2,6 +2,8 @@ class AutonomousVehicle():
 	def __init__(self):
         self.pedestrian = False
         self.car = False
+        self.stop_sign = False
+        self.chair = False
 
     @abstractmethod
     def move_forward(self):
@@ -23,16 +25,29 @@ class AutonomousVehicle():
     	# vehicle slows down and stops
         pass
 
-     @abstractmethod
-     def observe(self):
-     	# vehicle observe the environment and update the variables "pedestrian" and "car" accordingly
+    @abstractmethod
+    def approach_stop_sign(self):
+        # go straight and approach the observed stop sign
+        pass
+
+    @abstractmethod
+    def observe(self):
+     	# vehicle observe the environment and update the variables
         # self.pedestrian = {True, False}
         # self.car = {True, False}
+        # self.stop_sign = {True, False}
+        # self.chair = {True, False}
      	pass
 
-     def pedestrian_observed(self):
-     	return self.pedestrian
+    def pedestrian_observed(self):
+        return self.pedestrian
 
-     def car_observed(self):
-     	return self.car
+    def car_observed(self):
+        return self.car
+
+    def chair_observed(self):
+        return self.chair
+
+    def stop_sign_observed(self):
+        return self.stop_sign
 

@@ -3,7 +3,9 @@ MODULE main
 VAR
   Pedestrian_Observed : boolean;
   Car_Observed : boolean;
-  Action : {Stop, Move_forward, Turn_left, Turn_right};
+  Stop_Sign_Observed: boolean;
+  Chair: boolean;
+  Action : {Stop, Move_forward, Turn_left, Turn_right, Approach_stop_sign};
 
 ASSIGN
   init(Car_Observed) := FALSE;
@@ -18,13 +20,25 @@ ASSIGN
       TRUE : {TRUE, FALSE};
     esac;
 
-  init(Action) := Stop;
+  init(Stop_Sign_Observed) := FALSE;
+  next(Stop_Sign_Observed) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Chair) := FALSE;
+  next(Chair) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Action) := Move_forward;
   next(Action) :=
     case
-      Pedestrian_Observed : Stop;
-      Car_Observed : Stop;
-      !Pedestrian_Observed & !Car_Observed : Turn_left;
-      TRUE : Action;
+      !Chair : Move_forward;
+      Pedestrian_Observed : Turn_left;
+      Chair : Stop;
+      TRUE : {Stop, Move_forward, Turn_left, Turn_right, Approach_stop_sign};
     esac;
 
 LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)

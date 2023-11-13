@@ -58,7 +58,7 @@ def text2automaton(steps, model_path, verbose=False):
 def text2code(steps, api_path, name):
 	f_api = open(api_path)
 	api = f_api.read()
-	prompt = 'Define a Python function named' + name + ' to indicate the following steps: \n' + steps 
+	prompt = 'Define a Python function ' + name + '(class_instance) to indicate the following steps: \n' + steps 
 	prompt += '\nUsing the provided APIs: \n' + api
 	completion = openai.ChatCompletion.create(
 	      model="gpt-4",

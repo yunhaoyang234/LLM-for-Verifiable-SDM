@@ -7,5 +7,6 @@ def CrossRoad(vehicle):
         vehicle.stop()  # stop if car is observed
         return "Stop"
     else:  # Step 3
-        vehicle.move_forward()  # move forward if neither pedestrian nor car is observed
+        vehicle.move_forward()
         return "Move_forward"
+

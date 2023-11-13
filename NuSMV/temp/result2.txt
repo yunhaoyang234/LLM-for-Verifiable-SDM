@@ -1,1 +1,25 @@
--- specification  G ((Car_Observed | Pedestrian_Observed) ->  X Action = Stop)  is true
+-- specification  G ((Car_Observed | Pedestrian_Observed) ->  X Action = Stop)  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 1.1 <-
+    Pedestrian_Observed = FALSE
+    Car_Observed = FALSE
+    Stop_Sign_Observed = FALSE
+    Chair = FALSE
+    Action = Move_forward
+  -> State: 1.2 <-
+    Pedestrian_Observed = TRUE
+  -- Loop starts here
+  -> State: 1.3 <-
+    Pedestrian_Observed = FALSE
+    Car_Observed = TRUE
+    Chair = TRUE
+  -> State: 1.4 <-
+    Car_Observed = FALSE
+    Chair = FALSE
+    Action = Stop
+  -> State: 1.5 <-
+    Car_Observed = TRUE
+    Chair = TRUE
+    Action = Move_forward
