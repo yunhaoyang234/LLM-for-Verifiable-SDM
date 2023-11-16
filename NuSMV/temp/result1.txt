@@ -1,1 +1,19 @@
--- specification ( F (!Car_Observed & !Pedestrian_Observed) ->  F Action = Move_forward)  is true
+-- specification ( F (!Car_Observed & !Pedestrian_Observed) ->  F Action = Move_forward)  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 1.1 <-
+    Pedestrian_Observed = FALSE
+    Car_Observed = FALSE
+    Stop_Sign_Observed = FALSE
+    Chair = FALSE
+    Action = Stop
+  -> State: 1.2 <-
+    Pedestrian_Observed = TRUE
+    Stop_Sign_Observed = TRUE
+    Action = Turn_right
+  -- Loop starts here
+  -> State: 1.3 <-
+    Stop_Sign_Observed = FALSE
+    Action = Stop
+  -> State: 1.4 <-

@@ -1,12 +1,10 @@
-def CrossRoad(vehicle):
-    vehicle.observe()  # observe the environment first
-    if vehicle.pedestrian_observed():  # Step 1
-        vehicle.stop()  # stop if pedestrian is observed
-        return "Stop"
-    elif vehicle.car_observed():  # Step 2
-        vehicle.stop()  # stop if car is observed
-        return "Stop"
-    else:  # Step 3
-        vehicle.move_forward()
-        return "Move_forward"
-
+def CrossRoad(class_instance):
+    # Step 1: Check for Obstacles
+    if class_instance.pedestrian_observed() or class_instance.car_observed():
+        class_instance.stop()
+    # Step 2: Check for Stop Sign
+    elif class_instance.stop_sign_observed():
+        class_instance.approach_stop_sign()
+    # Step 3: Move Forward
+    elif not class_instance.pedestrian_observed() and not class_instance.car_observed() and not class_instance.stop_sign_observed():
+        class_instance.move_forward()

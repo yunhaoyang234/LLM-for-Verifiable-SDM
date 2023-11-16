@@ -53,7 +53,7 @@ def text2automaton(steps, model_path, verbose=False):
 	f = open('NuSMV/temp/task.smv', 'x')
 	f.write(nusmv)
 	f.close()
-	return nusmv
+	return nusmv, control
 
 def text2code(steps, api_path, name):
 	f_api = open(api_path)
@@ -76,10 +76,32 @@ def text2code(steps, api_path, name):
 	f.write(code)
 	f.close()
 
+def controller2code(controller, api_path, name):
+	f_api = open(api_path)
+	api = f_api.read()
+	prompt = 'Transform the following NuSMV to a Python function ' + name + '(class_instance):\n' + controller 
+	prompt += '\nUsing the provided APIs: \n' + api
+	completion = openai.ChatCompletion.create(
+	      model="gpt-4",
+	      messages=[
+	        {"role": "user", "content": prompt}
+	      ],
+	      max_tokens=400,
+	      temperature=0
+	)
+	code = completion.choices[0].message["content"]
+	code = code[code.find('def'):]
+	code = code[:code.find("```")]
+
+	f = open('output/'+name+'.py', 'x')
+	f.write(code)
+	f.close()
+
 def main():
     steps = gen_steps('examples/sample_model.smv', 'go straight at an intersection without traffic light', 3)
-    nusmv = text2automaton(steps, 'examples/sample_model.smv', False)
-    text2code(steps, 'examples/sample_api.py', 'CrossRoad')
+    nusmv, control = text2automaton(steps, 'examples/sample_model.smv', False)
+    # text2code(steps, 'examples/sample_api.py', 'CrossRoad')
+    controller2code(control, 'examples/sample_api.py', 'CrossRoad')
 
 if __name__ == "__main__":
     main()
