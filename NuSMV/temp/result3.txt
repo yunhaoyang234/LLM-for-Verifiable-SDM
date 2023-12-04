@@ -9,11 +9,15 @@ Trace Type: Counterexample
     Chair = FALSE
     Action = Stop
   -> State: 3.2 <-
-    Action = Turn_right
-  -> State: 3.3 <-
     Pedestrian_Observed = TRUE
     Action = Move_forward
   -- Loop starts here
-  -> State: 3.4 <-
+  -> State: 3.3 <-
     Pedestrian_Observed = FALSE
+    Action = Turn_left
+  -> State: 3.4 <-
+    Pedestrian_Observed = TRUE
+    Action = Stop
   -> State: 3.5 <-
+    Pedestrian_Observed = FALSE
+    Action = Turn_left

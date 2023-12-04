@@ -10,18 +10,12 @@ Trace Type: Counterexample
     Action = Stop
   -> State: 2.2 <-
     Pedestrian_Observed = TRUE
-    Action = Turn_right
-  -- Loop starts here
-  -> State: 2.3 <-
-    Stop_Sign_Observed = TRUE
     Action = Move_forward
-  -> State: 2.4 <-
+  -> State: 2.3 <-
     Pedestrian_Observed = FALSE
-    Stop_Sign_Observed = FALSE
+    Car_Observed = TRUE
+    Action = Turn_left
+  -- Loop starts here
+  -> State: 2.4 <-
     Action = Stop
   -> State: 2.5 <-
-    Action = Turn_right
-  -> State: 2.6 <-
-    Pedestrian_Observed = TRUE
-    Stop_Sign_Observed = TRUE
-    Action = Move_forward

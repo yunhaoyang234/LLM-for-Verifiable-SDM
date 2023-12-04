@@ -8,12 +8,14 @@ Trace Type: Counterexample
     Stop_Sign_Observed = FALSE
     Chair = FALSE
     Action = Stop
+  -- Loop starts here
   -> State: 1.2 <-
     Pedestrian_Observed = TRUE
-    Stop_Sign_Observed = TRUE
-    Action = Turn_right
-  -- Loop starts here
   -> State: 1.3 <-
-    Stop_Sign_Observed = FALSE
-    Action = Stop
+    Pedestrian_Observed = FALSE
+    Car_Observed = TRUE
+    Action = Turn_left
   -> State: 1.4 <-
+    Pedestrian_Observed = TRUE
+    Car_Observed = FALSE
+    Action = Stop

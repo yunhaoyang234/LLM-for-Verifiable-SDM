@@ -35,11 +35,23 @@ ASSIGN
   init(Action) := Stop;
   next(Action) :=
     case
-      Stop_Sign_Observed : Stop;
-      !Pedestrian_Observed & !Car_Observed & Action = Stop : Turn_right;
-      Action = Turn_right : Move_forward;
-      TRUE : Action;
+      Pedestrian_Observed & !Chair : {Turn_left};
+      Pedestrian_Observed & Chair : {Turn_left};
+      !Pedestrian_Observed & Chair : {Turn_right};
+      TRUE : {Stop, Move_forward, Approach_stop_sign};
     esac;
+
+SPEC
+  AG (Pedestrian_Observed -> AF Action = Turn_left);
+
+SPEC
+  AG (Chair & !Pedestrian_Observed -> AF Action = Turn_right);
+
+SPEC
+  AG (Pedestrian_Observed & Chair -> AF Action = Turn_left);
+
+SPEC
+  AG (!Pedestrian_Observed & !Chair -> AF (Action = Stop | Action = Move_forward | Action = Approach_stop_sign));
 
 LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)
 

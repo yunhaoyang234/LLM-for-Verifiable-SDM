@@ -12,6 +12,10 @@ parser.add_argument('--api_path', type=str, default='examples/sample_api.py')
 def main(args):
 	task = args.task_description
 	model_path, spec_path, api_path = args.model_path, args.spec_path, args.api_path
+	f = open('prompt.txt')
+	prompt = f.read()
+	if len(prompt) > 1:
+		task = prompt
 	steps = gen_steps(model_path, task, 3)
 	nusmv = text2automaton(steps, model_path, False)
 	text2code(steps, api_path, args.task_name)

@@ -1,0 +1,1 @@
+Turn left when observing a pedestrian and turn right when observing a chair, turn left when observing both.
