@@ -16,7 +16,7 @@ def gen_steps(model_path, task, max_steps=3):
 	prompt = 'Define ' + str(max_steps) + ' steps for ' + task + ' using the following varibles:\n'
 	prompt += props
 	completion = openai.ChatCompletion.create(
-		model="gpt-4", 
+		model="gpt-4-0613", 
 		messages=[ {"role": "user", "content": prompt} ],
 		max_tokens=200, 
 		temperature=0
@@ -38,7 +38,7 @@ def text2automaton(steps, model_path, verbose=False):
 	prompt += 'to indicate the following steps:\n' + steps
 
 	completion = openai.ChatCompletion.create(
-	      model="gpt-4",
+	      model="gpt-4-0613",
 	      messages=[
 	        {"role": "user", "content": prompt}
 	      ],
@@ -61,7 +61,7 @@ def text2code(steps, api_path, name):
 	prompt = 'Define a Python function ' + name + '(class_instance) to indicate the following steps: \n' + steps 
 	prompt += '\nUsing the provided APIs: \n' + api
 	completion = openai.ChatCompletion.create(
-	      model="gpt-4",
+	      model="gpt-4-0613",
 	      messages=[
 	        {"role": "user", "content": prompt}
 	      ],
@@ -82,7 +82,7 @@ def controller2code(controller, api_path, name):
 	prompt = 'Transform the following NuSMV to a Python function ' + name + '(class_instance):\n' + controller 
 	prompt += '\nUsing the provided APIs: \n' + api
 	completion = openai.ChatCompletion.create(
-	      model="gpt-4",
+	      model="gpt-4-0613",
 	      messages=[
 	        {"role": "user", "content": prompt}
 	      ],

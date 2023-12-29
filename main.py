@@ -4,6 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--task_name', type=str, default='CrossRoad')
+parser.add_argument('--generate_step', type=int, default=1)
 parser.add_argument('--task_description', type=str, default='go straight at an intersection without traffic light')
 parser.add_argument('--model_path', type=str, default='examples/sample_model.smv')
 parser.add_argument('--spec_path', type=str, default='examples/sample_ltl.txt')
@@ -16,7 +17,10 @@ def main(args):
 	prompt = f.read()
 	if len(prompt) > 1:
 		task = prompt
-	steps = gen_steps(model_path, task, 3)
+	if args.generate_step!=0:
+		steps = gen_steps(model_path, task, 3)
+	else:
+		steps = prompt
 	nusmv = text2automaton(steps, model_path, False)
 	text2code(steps, api_path, args.task_name)
 
