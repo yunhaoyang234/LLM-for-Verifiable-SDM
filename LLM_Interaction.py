@@ -18,7 +18,7 @@ def gen_steps(model_path, task, max_steps=3):
 	completion = openai.ChatCompletion.create(
 		model="gpt-4-0613", 
 		messages=[ {"role": "user", "content": prompt} ],
-		max_tokens=200, 
+		max_tokens=400, 
 		temperature=0
 	)
 	print('\n\n========================LLM OUTPUT========================')
@@ -47,6 +47,9 @@ def text2automaton(steps, model_path, verbose=False):
 	)
 	control = completion.choices[0].message["content"]
 	control = control[control.find('ASSIGN')+6:]
+	spec = control.find('SPEC')
+	if spec > 0:
+		control = control[:spec]
 	nusmv = nusmv_pre + '\n' + control
 	if verbose:
 		print(nusmv)

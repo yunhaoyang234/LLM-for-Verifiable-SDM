@@ -15,8 +15,12 @@ Trace Type: Counterexample
     Pedestrian_Observed = FALSE
     Action = Turn_left
   -> State: 2.4 <-
-    Pedestrian_Observed = TRUE
-    Action = Stop
+    Chair = TRUE
+    Action = Move_forward
   -> State: 2.5 <-
+    Pedestrian_Observed = TRUE
+    Chair = FALSE
+    Action = Turn_right
+  -> State: 2.6 <-
     Pedestrian_Observed = FALSE
     Action = Turn_left
