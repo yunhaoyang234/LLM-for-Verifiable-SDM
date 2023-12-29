@@ -2,20 +2,19 @@
 -- as demonstrated by the following execution sequence
 Trace Description: LTL Counterexample 
 Trace Type: Counterexample 
-  -> State: 2.1 <-
+  -> State: 1.1 <-
     Pedestrian_Observed = FALSE
     Car_Observed = FALSE
     Stop_Sign_Observed = FALSE
     Chair = FALSE
-    Action = Stop
-  -> State: 2.2 <-
-    Pedestrian_Observed = TRUE
     Action = Move_forward
-  -> State: 2.3 <-
+  -> State: 1.2 <-
+    Pedestrian_Observed = TRUE
+  -> State: 1.3 <-
     Pedestrian_Observed = FALSE
     Car_Observed = TRUE
     Action = Turn_left
   -- Loop starts here
-  -> State: 2.4 <-
+  -> State: 1.4 <-
     Action = Stop
-  -> State: 2.5 <-
+  -> State: 1.5 <-

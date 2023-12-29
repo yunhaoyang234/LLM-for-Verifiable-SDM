@@ -1,9 +1,9 @@
 import openai
 import os 
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = input("please enter your OpenAI API_Key:")
 
-openai.organization = "org-6S5CZI9GpGCluYXm8Sl8zN8n"
+openai.organization = input("please enter your OpenAI Organization_ID:")
 openai.api_key = OPENAI_API_KEY
 
 def gen_steps(model_path, task, max_steps=3):
