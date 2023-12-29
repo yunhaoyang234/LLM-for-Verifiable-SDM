@@ -17,7 +17,7 @@ $ pip install openai
 ## Instructions
 1. Write down the description of the task in ```prompt.txt``` and save the txt file.
 
-2. Provide a System_API file, a LTL.txt file with your task requirements in the form of linear temporal logic, and a Model.smv file to represent your system in NuSMV.
+2. Provide a System_API file, an LTL.txt file with your task requirements in the form of linear temporal logic, and a Model.smv file to represent your system in NuSMV.
 
 3. Run the following command:
 
@@ -29,10 +29,10 @@ $ python main.py \
       	 --api_path path_to_System_API\
 ```
 
-The terminal will output the verification outcomes and save the verification results in ```NuSMV/temp/```folder. The executable code will be saved to ```output/``` folder.
+The terminal will output the verification outcomes and save the verification results in the ```NuSMV/temp/``` folder. The executable code will be saved to the ```output/``` folder.
 
 ### Verify user-rovided instruction 
-Write down the step instruction of the task in ```prompt.txt``` and save the txt file. Then, run the following command:
+Write down the step instructions for the task in ```prompt.txt``` and save the txt file. Then, run the following command:
 ```bash
 $ python main.py \
          --task_name TaskName\
@@ -48,8 +48,8 @@ $ rm -rf output && mkdir output
 ```
 
 ## References
-[1] Y Yang, C Neary, U Topcu. ![Multimodal Pretrained Models for Verifiable Sequential Decision-Making: Planning, Grounding, and Perception](https://openreview.net/forum?id=ilSesSBQDh). Accepted to AAMAS 2024 (Oral) & NeurIPS 2023 Foundation Models for Decision Making Workshop.
+[1] Y Yang, C Neary, U Topcu. [Multimodal Pretrained Models for Verifiable Sequential Decision-Making: Planning, Grounding, and Perception](https://openreview.net/forum?id=ilSesSBQDh). Accepted to AAMAS 2024 (Oral) & NeurIPS 2023 Foundation Models for Decision Making Workshop.
 
-[2] Y Yang, JR Gaglione, C Neary, U Topcu. ![Large Language Models for Verifiable Sequential Decision-Making in Autonomous Systems](https://openreview.net/forum?id=3IDdNlRbwk). 2nd Workshop on Language and Robot Learning: Language as Grounding.
+[2] Y Yang, JR Gaglione, C Neary, U Topcu. [Large Language Models for Verifiable Sequential Decision-Making in Autonomous Systems](https://openreview.net/forum?id=3IDdNlRbwk). 2nd Workshop on Language and Robot Learning: Language as Grounding.
 
-[3] Y Yang, NP Bhatt, T Ingebrand, W Ward, S Carr, Z Wang, U Topcu. ![Fine-Tuning Language Models Using Formal Methods Feedback](https://openreview.net/forum?id=fWkTKHWfie). Neuro-Symbolic Learning and Reasoning in the era of Large Language Models.
+[3] Y Yang, NP Bhatt, T Ingebrand, W Ward, S Carr, Z Wang, U Topcu. [Fine-Tuning Language Models Using Formal Methods Feedback](https://openreview.net/forum?id=fWkTKHWfie). Neuro-Symbolic Learning and Reasoning in the era of Large Language Models.
