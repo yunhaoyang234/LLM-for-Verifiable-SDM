@@ -31,7 +31,7 @@ $ python main.py \
 
 The terminal will output the verification outcomes and save the verification results in the ```NuSMV/temp/``` folder. The executable code will be saved to the ```output/``` folder.
 
-### Verify user-rovided instruction 
+#### Verify user-provided instruction 
 Write down the step instructions for the task in ```prompt.txt``` and save the txt file. Then, run the following command:
 ```bash
 $ python main.py \
@@ -42,7 +42,7 @@ $ python main.py \
          --api_path path_to_System_API\
 ```
 
-### Note: please use different Task_Name on different runs, or run the following command
+#### Note: please use different Task_Name on different runs, or run the following command
 ```bash
 $ rm -rf output && mkdir output
 ```
