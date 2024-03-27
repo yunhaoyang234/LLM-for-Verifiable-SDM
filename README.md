@@ -11,7 +11,7 @@ Here is a visual demonstration of the pipeline:
 
 ## Setup
 ```bash
-$ pip install openai
+$ pip install openai==1.12.0
 ```
 
 ## Instructions
@@ -35,7 +35,6 @@ The terminal will output the verification outcomes and save the verification res
 Write down the step instructions for the task in ```prompt.txt``` and save the txt file. Then, run the following command:
 ```bash
 $ python main.py \
-         --task_name TaskName\
          --generate_step 0\
          --model_path path_to_Model.smv\
          --spec_path path_to_LTL.txt\
