@@ -3,7 +3,6 @@ class AutonomousVehicle():
         self.pedestrian = False
         self.car = False
         self.stop_sign = False
-        self.chair = False
 
     @abstractmethod
     def move_forward(self):
@@ -38,15 +37,12 @@ class AutonomousVehicle():
         # self.stop_sign = {True, False}
         # self.chair = {True, False}
      	pass
-
+    
     def pedestrian_observed(self):
         return self.pedestrian
 
     def car_observed(self):
         return self.car
-
-    def chair_observed(self):
-        return self.chair
 
     def stop_sign_observed(self):
         return self.stop_sign

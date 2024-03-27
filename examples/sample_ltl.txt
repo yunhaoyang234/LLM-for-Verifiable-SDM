@@ -1,5 +1,5 @@
-LTLSPEC NAME spec1 := (F (!Car_Observed & !Pedestrian_Observed) ) -> (F Action = Move_forward)
+LTLSPEC NAME spec1 := G (! (Action=Move_forward | Action=Turn_left | Action=Turn_right) &  Pedestrian_Observed)
 
-LTLSPEC NAME spec2 := G ((Car_Observed | Pedestrian_Observed) -> X(Action = Stop));
+LTLSPEC NAME spec2 := G (Stop_Sign_Observed -> F(Action = Stop));
 
-LTLSPEC NAME spec3 := G (Action = Move_forward -> (!Car_Observed & !Pedestrian_Observed))
+LTLSPEC NAME spec3 := G (F(! Pedestrian_Observed & ! Car_Observed) -> F ! (Action=Stop) )
