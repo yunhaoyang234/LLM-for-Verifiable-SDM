@@ -83,9 +83,9 @@ def text2code(steps, api_path, name):
 	code = code[code.find('def'):]
 	code = code[:code.find("```")]
 
-	f = open('output/'+name+'.py', 'x')
-	f.write(code)
-	f.close()
+	with open('output/'+name+'.py', mode="w") as f:
+		f.write(code)
+		f.close()
 
 def controller2code(controller, api_path, name):
 	f_api = open(api_path)
@@ -106,9 +106,9 @@ def controller2code(controller, api_path, name):
 	code = code[code.find('def'):]
 	code = code[:code.find("```")]
 
-	f = open('output/'+name+'.py', 'x')
-	f.write(code)
-	f.close()
+	with open('output/'+name+'.py', mode="w") as f:
+		f.write(code)
+		f.close()
 
 def main():
     steps = gen_steps('examples/sample_model.smv', 'go straight at an intersection without traffic light', 3)
