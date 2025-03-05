@@ -4,8 +4,6 @@ from openai import OpenAI
 
 OPENAI_API_KEY = input("please enter your OpenAI API_Key:")
 
-openai.organization = input("please enter your OpenAI Organization_ID:")
-
 openai.api_key = OPENAI_API_KEY
 openai_api_key = OPENAI_API_KEY
 
@@ -64,6 +62,37 @@ def text2automaton(steps, model_path, verbose=False):
 	f.close()
 	return nusmv, control
 
+def gen_automaton(task, model_path, verbose=False):
+	os.system('rm -rf NuSMV/temp')
+	os.system('mkdir NuSMV/temp')
+	fn = open(model_path)
+	nusmv_pre = fn.read()
+
+	prompt = 'Complete the following NuSMV solving the task ' + task + ':\n' + nusmv_pre +'\n'
+
+	client = OpenAI(api_key=openai_api_key)
+	completion = client.chat.completions.create(
+	      model="gpt-4o",
+	      messages=[
+	        {"role": "user", "content": prompt}
+	      ],
+	      max_tokens=400,
+	      temperature=0
+	)
+	control = completion.choices[0].message.content
+	control = control[control.find('  init(Action)'):]
+	spec = control.find('```')
+	if spec > 0:
+		control = control[:spec]
+	nusmv = nusmv_pre + '\n' + control
+	if verbose:
+		print(nusmv)
+		exit()
+	f = open('NuSMV/temp/task.smv', 'x')
+	f.write(nusmv)
+	f.close()
+	return nusmv, control
+
 def text2code(steps, api_path, name):
 	f_api = open(api_path)
 	api = f_api.read()
@@ -110,11 +139,11 @@ def controller2code(controller, api_path, name):
 		f.write(code)
 		f.close()
 
-def main():
-    steps = gen_steps('examples/sample_model.smv', 'go straight at an intersection without traffic light', 3)
-    nusmv, control = text2automaton(steps, 'examples/sample_model.smv', False)
-    # text2code(steps, 'examples/sample_api.py', 'CrossRoad')
-    controller2code(control, 'examples/sample_api.py', 'CrossRoad')
+# def main():
+#     steps = gen_steps('examples/sample_model.smv', 'go straight at an intersection without traffic light', 3)
+#     nusmv, control = text2automaton(steps, 'examples/sample_model.smv', False)
+#     text2code(steps, 'examples/sample_api.py', 'CrossRoad')
+#     controller2code(control, 'examples/sample_api.py', 'CrossRoad')
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

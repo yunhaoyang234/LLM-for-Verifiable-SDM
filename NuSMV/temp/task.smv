@@ -4,8 +4,7 @@ VAR
   Pedestrian_Observed : boolean;
   Car_Observed : boolean;
   Stop_Sign_Observed: boolean;
-  Chair: boolean;
-  Action : {Stop, Move_forward, Turn_left, Turn_right, Approach_stop_sign};
+  Action : {Stop, Move_forward, Turn_left, Turn_right};
 
 ASSIGN
   init(Car_Observed) := FALSE;
@@ -26,18 +25,11 @@ ASSIGN
       TRUE: {TRUE, FALSE};
     esac;
 
-  init(Chair) := FALSE;
-  next(Chair) :=
-    case
-      TRUE: {TRUE, FALSE};
-    esac;
-
-  init(Action) := Move_forward;
+  init(Action) := Stop;
   next(Action) :=
     case
-      Pedestrian_Observed & !Chair : Turn_left;
-      Chair & !Pedestrian_Observed : Turn_right;
-      Pedestrian_Observed & Chair : Turn_left;
-      Stop_Sign_Observed : Approach_stop_sign;
-      TRUE : Move_forward;
+      Stop_Sign_Observed & !Car_Observed & !Pedestrian_Observed : Turn_left;
+      Stop_Sign_Observed : Stop;
+      !Stop_Sign_Observed & !Car_Observed & !Pedestrian_Observed : Move_forward;
+      TRUE : Stop;
     esac;

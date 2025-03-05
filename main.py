@@ -21,8 +21,9 @@ def main(args):
 		steps = gen_steps(model_path, task, 3)
 	else:
 		steps = prompt
-	nusmv = text2automaton(steps, model_path, False)
-	text2code(steps, api_path, args.task_name)
+	# nusmv = text2automaton(steps, model_path, False)
+	# text2code(steps, api_path, args.task_name)
+	gen_automaton(task, model_path, verbose=False)
 
 	automaton_path = 'NuSMV/temp/task.smv'
 	model_checking(automaton_path, spec_path)

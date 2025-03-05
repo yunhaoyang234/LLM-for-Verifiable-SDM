@@ -1,0 +1,29 @@
+LTLSPEC NAME spec1 := G (Pedestrian -> F (Action = Stop))
+
+LTLSPEC NAME spec2 := G ((Opposite_Car & ! Green_Left_Turn_Light) -> !(Action = Turn_left))
+
+LTLSPEC NAME spec3 := G ( ! Green_Traffic_Light -> ! (Action = Move_forward))
+
+LTLSPEC NAME spec4 := G (Stop_Sign -> F (Action = Stop))
+
+LTLSPEC NAME spec5 := G ((Car_From_Left | Pedestrian_At_Right) -> ! (Action = Turn_right))
+
+LTLSPEC NAME spec6 := G ( (Action = Turn_right) | (Action = Turn_left) | (Action = Move_forward) | (Action = Stop))
+
+LTLSPEC NAME spec7 := F ((Green_Traffic_Light | Green_Left_Turn_Light) -> F ! (Action = Stop))
+
+LTLSPEC NAME spec8 := G (! Green_Traffic_Light -> F (Action = Stop))
+
+LTLSPEC NAME spec9 := G (Car_From_Left -> ! ((Action = Turn_left) | (Action = Turn_right)))
+
+LTLSPEC NAME spec10 := G (Green_Traffic_Light -> F ! (Action = Stop))
+
+LTLSPEC NAME spec11 := G (((Action = Turn_right) & ! Green_Traffic_Light) -> ! Car_From_Left)
+
+LTLSPEC NAME spec12 := G (((Action = Turn_left) & ! Green_Left_Turn_Light) -> (! Car_From_Left & ! Car_From_Right & ! Opposite_Car))
+
+LTLSPEC NAME spec13 := G ((Stop_Sign & ! Car_From_Left & ! Car_From_Right) -> (F ! (Action = Stop)))
+
+LTLSPEC NAME spec14 := G((Action = Move_forward) -> ! Pedestrian)
+
+LTLSPEC NAME spec15 := G(((Action = Turn_right) & Stop_Sign) -> ! Car_From_Left)
