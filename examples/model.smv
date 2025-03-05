@@ -10,8 +10,32 @@ VAR
   Action : {Stop, Move_forward, Turn_left, Turn_right};
 
 ASSIGN
+  init(Green_Traffic_Light) := FALSE;
+  next(Green_Traffic_Light) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Green_Left_Turn_Light) := FALSE;
+  next(Green_Left_Turn_Light) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+  
   init(Opposite_Car) := FALSE;
   next(Opposite_Car) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Car_From_Left) := FALSE;
+  next(Car_From_Left) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Car_From_Right) := FALSE;
+  next(Car_From_Right) :=
     case
       TRUE: {TRUE, FALSE};
     esac;

@@ -1,0 +1,1 @@
+-- specification  G (((Action = Turn_right | Action = Turn_left) | Action = Move_forward) | Action = Stop)  is true

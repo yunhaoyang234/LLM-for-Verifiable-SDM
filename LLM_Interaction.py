@@ -76,7 +76,7 @@ def gen_automaton(task, model_path, verbose=False):
 	      messages=[
 	        {"role": "user", "content": prompt}
 	      ],
-	      max_tokens=400,
+	      max_tokens=1000,
 	      temperature=0
 	)
 	control = completion.choices[0].message.content

@@ -6,8 +6,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task_name', type=str, default='CrossRoad')
 parser.add_argument('--generate_step', type=int, default=1)
 parser.add_argument('--task_description', type=str, default='go straight at an intersection without traffic light')
-parser.add_argument('--model_path', type=str, default='examples/sample_model.smv')
-parser.add_argument('--spec_path', type=str, default='examples/sample_ltl.txt')
+parser.add_argument('--model_path', type=str, default='examples/model.smv')
+parser.add_argument('--spec_path', type=str, default='examples/LTL.txt')
 parser.add_argument('--api_path', type=str, default='examples/sample_api.py')
 
 def main(args):

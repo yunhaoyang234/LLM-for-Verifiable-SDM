@@ -1,0 +1,1 @@
+-- specification  G ((Car_From_Left | Pedestrian) -> !(Action = Turn_right))  is true

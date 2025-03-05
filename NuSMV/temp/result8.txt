@@ -1,8 +1,8 @@
--- specification  G (!Green_Traffic_Light -> !(Action = Move_forward))  is false
+-- specification  G (!Green_Traffic_Light ->  F Action = Stop)  is false
 -- as demonstrated by the following execution sequence
 Trace Description: LTL Counterexample 
 Trace Type: Counterexample 
-  -> State: 2.1 <-
+  -> State: 3.1 <-
     Pedestrian = FALSE
     Opposite_Car = FALSE
     Green_Traffic_Light = FALSE
@@ -11,12 +11,20 @@ Trace Type: Counterexample
     Car_From_Left = FALSE
     Car_From_Right = FALSE
     Action = Stop
-  -> State: 2.2 <-
+  -> State: 3.2 <-
     Green_Traffic_Light = TRUE
-  -> State: 2.3 <-
+  -> State: 3.3 <-
     Green_Traffic_Light = FALSE
+    Green_Left_Turn_Light = TRUE
     Action = Move_forward
   -- Loop starts here
-  -> State: 2.4 <-
-    Action = Stop
-  -> State: 2.5 <-
+  -> State: 3.4 <-
+    Green_Traffic_Light = TRUE
+    Green_Left_Turn_Light = FALSE
+    Action = Turn_left
+  -> State: 3.5 <-
+    Green_Left_Turn_Light = TRUE
+    Action = Move_forward
+  -> State: 3.6 <-
+    Green_Left_Turn_Light = FALSE
+    Action = Turn_left

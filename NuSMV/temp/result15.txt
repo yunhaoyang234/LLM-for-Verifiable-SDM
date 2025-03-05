@@ -1,0 +1,1 @@
+-- specification  G ((Action = Turn_right & Stop_Sign) -> !Car_From_Left)  is true

@@ -1,0 +1,1 @@
+-- specification  G (Stop_Sign ->  F Action = Stop)  is true

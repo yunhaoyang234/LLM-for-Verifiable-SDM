@@ -6,7 +6,7 @@ LTLSPEC NAME spec3 := G ( ! Green_Traffic_Light -> ! (Action = Move_forward))
 
 LTLSPEC NAME spec4 := G (Stop_Sign -> F (Action = Stop))
 
-LTLSPEC NAME spec5 := G ((Car_From_Left | Pedestrian_At_Right) -> ! (Action = Turn_right))
+LTLSPEC NAME spec5 := G ((Car_From_Left | Pedestrian) -> ! (Action = Turn_right))
 
 LTLSPEC NAME spec6 := G ( (Action = Turn_right) | (Action = Turn_left) | (Action = Move_forward) | (Action = Stop))
 

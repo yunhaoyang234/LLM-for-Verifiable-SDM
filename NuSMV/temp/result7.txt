@@ -1,0 +1,1 @@
+-- specification  F ((Green_Traffic_Light | Green_Left_Turn_Light) ->  F !(Action = Stop))  is true

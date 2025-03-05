@@ -1,42 +1,108 @@
-
 MODULE main
 VAR
-  Pedestrian_Observed : boolean;
-  Car_Observed : boolean;
-  Stop_Sign_Observed: boolean;
+  Pedestrian : boolean;
+  Opposite_Car : boolean;
+  Green_Traffic_Light: boolean;
+  Green_Left_Turn_Light: boolean;
+  Stop_Sign: boolean;
+  Car_From_Left: boolean;
+  Car_From_Right: boolean;
   Action : {Stop, Move_forward, Turn_left, Turn_right};
 
 ASSIGN
-  init(Car_Observed) := FALSE;
-  next(Car_Observed) :=
+  init(Green_Traffic_Light) := FALSE;
+  next(Green_Traffic_Light) :=
     case
       TRUE: {TRUE, FALSE};
     esac;
 
-  init(Pedestrian_Observed) := FALSE;
-  next(Pedestrian_Observed) :=
+  init(Green_Left_Turn_Light) := FALSE;
+  next(Green_Left_Turn_Light) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+  
+  init(Opposite_Car) := FALSE;
+  next(Opposite_Car) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Car_From_Left) := FALSE;
+  next(Car_From_Left) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Car_From_Right) := FALSE;
+  next(Car_From_Right) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
+  init(Pedestrian) := FALSE;
+  next(Pedestrian) :=
     case
       TRUE : {TRUE, FALSE};
     esac;
 
-  init(Stop_Sign_Observed) := FALSE;
-  next(Stop_Sign_Observed) :=
+  init(Stop_Sign) := FALSE;
+  next(Stop_Sign) :=
     case
       TRUE: {TRUE, FALSE};
     esac;
-
   init(Action) := Stop;
   next(Action) :=
     case
-      Stop_Sign_Observed & !Car_Observed & !Pedestrian_Observed : Turn_left;
-      Stop_Sign_Observed : Stop;
-      !Stop_Sign_Observed & !Car_Observed & !Pedestrian_Observed : Move_forward;
+      -- If there's a stop sign, the car must stop
+      Stop_Sign : Stop;
+      
+      -- If there's a pedestrian, the car must stop
+      Pedestrian : Stop;
+      
+      -- If there's an opposite car, the car must stop
+      Opposite_Car : Stop;
+      
+      -- If there's a car from the left or right, the car must stop
+      Car_From_Left | Car_From_Right : Stop;
+      
+      -- If the green left turn light is on and no other cars or pedestrians are present, turn left
+      Green_Left_Turn_Light & !Opposite_Car & !Car_From_Left & !Car_From_Right & !Pedestrian : Turn_left;
+      
+      -- If the green traffic light is on and no other cars or pedestrians are present, move forward
+      Green_Traffic_Light & !Opposite_Car & !Car_From_Left & !Car_From_Right & !Pedestrian : Move_forward;
+      
+      -- Default action is to stop
       TRUE : Stop;
     esac;
 
 
-LTLSPEC NAME spec1 := G (! (Action=Move_forward | Action=Turn_left | Action=Turn_right) &  Pedestrian_Observed)
+LTLSPEC NAME spec1 := G (Pedestrian -> F (Action = Stop))
 
-LTLSPEC NAME spec2 := G (Stop_Sign_Observed -> F(Action = Stop));
+LTLSPEC NAME spec2 := G ((Opposite_Car & ! Green_Left_Turn_Light) -> !(Action = Turn_left))
 
-LTLSPEC NAME spec3 := G (F(! Pedestrian_Observed & ! Car_Observed) -> F ! (Action=Stop) )
+LTLSPEC NAME spec3 := G ( ! Green_Traffic_Light -> ! (Action = Move_forward))
+
+LTLSPEC NAME spec4 := G (Stop_Sign -> F (Action = Stop))
+
+LTLSPEC NAME spec5 := G ((Car_From_Left | Pedestrian) -> ! (Action = Turn_right))
+
+LTLSPEC NAME spec6 := G ( (Action = Turn_right) | (Action = Turn_left) | (Action = Move_forward) | (Action = Stop))
+
+LTLSPEC NAME spec7 := F ((Green_Traffic_Light | Green_Left_Turn_Light) -> F ! (Action = Stop))
+
+LTLSPEC NAME spec8 := G (! Green_Traffic_Light -> F (Action = Stop))
+
+LTLSPEC NAME spec9 := G (Car_From_Left -> ! ((Action = Turn_left) | (Action = Turn_right)))
+
+LTLSPEC NAME spec10 := G (Green_Traffic_Light -> F ! (Action = Stop))
+
+LTLSPEC NAME spec11 := G (((Action = Turn_right) & ! Green_Traffic_Light) -> ! Car_From_Left)
+
+LTLSPEC NAME spec12 := G (((Action = Turn_left) & ! Green_Left_Turn_Light) -> (! Car_From_Left & ! Car_From_Right & ! Opposite_Car))
+
+LTLSPEC NAME spec13 := G ((Stop_Sign & ! Car_From_Left & ! Car_From_Right) -> (F ! (Action = Stop)))
+
+LTLSPEC NAME spec14 := G((Action = Move_forward) -> ! Pedestrian)
+
+LTLSPEC NAME spec15 := G(((Action = Turn_right) & Stop_Sign) -> ! Car_From_Left)

@@ -1,16 +1,1 @@
--- specification  G (!((Action = Move_forward | Action = Turn_left) | Action = Turn_right) & Pedestrian_Observed)  is false
--- as demonstrated by the following execution sequence
-Trace Description: LTL Counterexample 
-Trace Type: Counterexample 
-  -- Loop starts here
-  -> State: 1.1 <-
-    Pedestrian_Observed = FALSE
-    Car_Observed = FALSE
-    Stop_Sign_Observed = FALSE
-    Action = Stop
-  -> State: 1.2 <-
-    Pedestrian_Observed = TRUE
-    Action = Move_forward
-  -> State: 1.3 <-
-    Pedestrian_Observed = FALSE
-    Action = Stop
+-- specification  G (Pedestrian ->  F Action = Stop)  is true

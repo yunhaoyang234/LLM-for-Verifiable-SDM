@@ -1,0 +1,1 @@
+-- specification  G ((Action = Turn_right & !Green_Traffic_Light) -> !Car_From_Left)  is true
