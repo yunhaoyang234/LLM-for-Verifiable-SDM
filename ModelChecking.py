@@ -54,6 +54,7 @@ def show_stats():
     print(str(len(results) - num_fails) + ' of ' + str(len(results)) + ' specifications are satisfied.')
     print('====================================================')
     print('====================================================' + '\n\n')
+    return num_fails
 
 def main():
     automaton_path = 'NuSMV/temp/task.smv'

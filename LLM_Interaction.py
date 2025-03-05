@@ -91,7 +91,7 @@ def gen_automaton(task, model_path, verbose=False):
 	f = open('NuSMV/temp/task.smv', 'x')
 	f.write(nusmv)
 	f.close()
-	return nusmv, control
+	return nusmv, control, prompt
 
 def text2code(steps, api_path, name):
 	f_api = open(api_path)

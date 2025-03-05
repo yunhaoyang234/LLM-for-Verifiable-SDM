@@ -2,7 +2,7 @@
 -- as demonstrated by the following execution sequence
 Trace Description: LTL Counterexample 
 Trace Type: Counterexample 
-  -> State: 7.1 <-
+  -> State: 3.1 <-
     Pedestrian = FALSE
     Opposite_Car = FALSE
     Green_Traffic_Light = FALSE
@@ -11,10 +11,10 @@ Trace Type: Counterexample
     Car_From_Left = FALSE
     Car_From_Right = FALSE
     Action = Stop
-  -> State: 7.2 <-
+  -> State: 3.2 <-
     Stop_Sign = TRUE
   -- Loop starts here
-  -> State: 7.3 <-
+  -> State: 3.3 <-
     Pedestrian = TRUE
     Car_From_Left = TRUE
-  -> State: 7.4 <-
+  -> State: 3.4 <-

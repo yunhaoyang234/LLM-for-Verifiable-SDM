@@ -54,24 +54,6 @@ ASSIGN
   init(Action) := Stop;
   next(Action) :=
     case
-      -- If there's a stop sign, the car must stop
-      Stop_Sign : Stop;
-      
-      -- If there's a pedestrian, the car must stop
-      Pedestrian : Stop;
-      
-      -- If there's an opposite car, the car must stop
-      Opposite_Car : Stop;
-      
-      -- If there's a car from the left or right, the car must stop
-      Car_From_Left | Car_From_Right : Stop;
-      
-      -- If the green left turn light is on and no other cars or pedestrians are present, turn left
-      Green_Left_Turn_Light & !Opposite_Car & !Car_From_Left & !Car_From_Right & !Pedestrian : Turn_left;
-      
-      -- If the green traffic light is on and no other cars or pedestrians are present, move forward
-      Green_Traffic_Light & !Opposite_Car & !Car_From_Left & !Car_From_Right & !Pedestrian : Move_forward;
-      
-      -- Default action is to stop
-      TRUE : Stop;
+      Green_Traffic_Light & !Pedestrian & !Opposite_Car & !Car_From_Left & !Car_From_Right & !Stop_Sign: Move_forward;
+      TRUE: Stop;
     esac;
