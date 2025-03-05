@@ -47,8 +47,8 @@ $ rm -rf output && mkdir output
 ```
 
 ## References
-[1] Y Yang, C Neary, U Topcu. [Multimodal Pretrained Models for Verifiable Sequential Decision-Making: Planning, Grounding, and Perception](https://openreview.net/forum?id=ilSesSBQDh). Accepted to AAMAS 2024 (Oral) & NeurIPS 2023 Foundation Models for Decision Making Workshop.
+[1] Y Yang, C Neary, U Topcu. [Multimodal Pretrained Models for Verifiable Sequential Decision-Making: Planning, Grounding, and Perception](https://openreview.net/forum?id=ilSesSBQDh). NeurIPS 2023 Foundation Models for Decision Making Workshop.
 
 [2] Y Yang, JR Gaglione, C Neary, U Topcu. [Large Language Models for Verifiable Sequential Decision-Making in Autonomous Systems](https://openreview.net/forum?id=3IDdNlRbwk). 2nd Workshop on Language and Robot Learning: Language as Grounding.
 
-[3] Y Yang, NP Bhatt, T Ingebrand, W Ward, S Carr, Z Wang, U Topcu. [Fine-Tuning Language Models Using Formal Methods Feedback](https://openreview.net/forum?id=fWkTKHWfie). Neuro-Symbolic Learning and Reasoning in the era of Large Language Models.
+[3] Y Yang, NP Bhatt, T Ingebrand, W Ward, S Carr, Z Wang, U Topcu. [Fine-Tuning Language Models Using Formal Methods Feedback](https://openreview.net/forum?id=fWkTKHWfie). Neuro-Symbolic Learning and Reasoning in the Era of Large Language Models.
