@@ -6,31 +6,33 @@ import json
 acts = ['go straight', 'turn left', 'turn right']
 pos = ['traffic light', 'stop sign']
 
-def get_train_data():
+def get_train_data(size=10):
     data = []
 
-    task = acts[np.random.randint(len(acts))] + ' at ' + pos[np.random.randint(len(pos))]
-    model_path, spec_path = 'examples/model.smv', 'examples/LTL.txt'
+    for i in range(size):
+        task = acts[np.random.randint(len(acts))] + ' at ' + pos[np.random.randint(len(pos))]
+        model_path, spec_path = 'examples/model.smv', 'examples/LTL.txt'
 
-    nusmv, control, prompt = gen_automaton(task, model_path, verbose=False)
-    automaton_path = 'NuSMV/temp/task.smv'
-    model_checking(automaton_path, spec_path)
-    num_fail = show_stats()
+        nusmv, control, prompt = gen_automaton(task, model_path, verbose=False)
+        automaton_path = 'NuSMV/temp/task.smv'
+        model_checking(automaton_path, spec_path)
+        num_fail = show_stats(verbose=False)
+        print(num_fail)
 
-    if num_fail < 10:
-        data_point = {
-            'messages': [
-                {
-                    "role":"user",
-                    "content": prompt
-                },
-                {
-                    "role":"assistant",
-                    "content": control
-                }
-            ]
-        }
-        data.append(data_point)
+        if num_fail < 8:
+            data_point = {
+                'messages': [
+                    {
+                        "role":"user",
+                        "content": prompt
+                    },
+                    {
+                        "role":"assistant",
+                        "content": control
+                    }
+                ]
+            }
+            data.append(data_point)
     return data
 
 def save_data(data):

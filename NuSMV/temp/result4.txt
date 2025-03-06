@@ -1,1 +1,27 @@
--- specification  G (Stop_Sign ->  F Action = Stop)  is true
+-- specification  G (Stop_Sign ->  F Action = Stop)  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 3.1 <-
+    Pedestrian = FALSE
+    Opposite_Car = FALSE
+    Green_Traffic_Light = FALSE
+    Green_Left_Turn_Light = FALSE
+    Stop_Sign = FALSE
+    Car_From_Left = FALSE
+    Car_From_Right = FALSE
+    Action = Stop
+  -> State: 3.2 <-
+    Green_Traffic_Light = TRUE
+  -> State: 3.3 <-
+    Green_Traffic_Light = FALSE
+    Stop_Sign = TRUE
+    Action = Move_forward
+  -> State: 3.4 <-
+    Green_Traffic_Light = TRUE
+    Stop_Sign = FALSE
+    Action = Turn_left
+  -- Loop starts here
+  -> State: 3.5 <-
+    Action = Move_forward
+  -> State: 3.6 <-

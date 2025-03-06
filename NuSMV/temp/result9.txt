@@ -1,1 +1,24 @@
--- specification  G (Car_From_Left -> !(Action = Turn_left | Action = Turn_right))  is true
+-- specification  G (Car_From_Left -> !(Action = Turn_left | Action = Turn_right))  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 5.1 <-
+    Pedestrian = FALSE
+    Opposite_Car = FALSE
+    Green_Traffic_Light = FALSE
+    Green_Left_Turn_Light = FALSE
+    Stop_Sign = FALSE
+    Car_From_Left = FALSE
+    Car_From_Right = FALSE
+    Action = Stop
+  -> State: 5.2 <-
+    Stop_Sign = TRUE
+  -> State: 5.3 <-
+    Stop_Sign = FALSE
+    Car_From_Left = TRUE
+    Action = Turn_left
+  -- Loop starts here
+  -> State: 5.4 <-
+    Car_From_Left = FALSE
+    Action = Stop
+  -> State: 5.5 <-

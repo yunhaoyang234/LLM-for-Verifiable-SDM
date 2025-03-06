@@ -36,7 +36,7 @@ def model_checking(automaton_path, spec_path):
     f.close()
     os.system('NuSMV/bin/NuSMV -source NuSMV/temp/script.csh')
 
-def show_stats():
+def show_stats(verbose=True):
     files = os.listdir('NuSMV/temp/')
     results = []
     for f in files:
@@ -48,12 +48,13 @@ def show_stats():
         text = f.read()
         result_text += text + '\n\n'
     num_fails = result_text.count('false')
-    print('\n\n' + result_text)
-    print('======================Summary=======================')
-    print('====================================================')
-    print(str(len(results) - num_fails) + ' of ' + str(len(results)) + ' specifications are satisfied.')
-    print('====================================================')
-    print('====================================================' + '\n\n')
+    if verbose:
+        print('\n\n' + result_text)
+        print('======================Summary=======================')
+        print('====================================================')
+        print(str(len(results) - num_fails) + ' of ' + str(len(results)) + ' specifications are satisfied.')
+        print('====================================================')
+        print('====================================================' + '\n\n')
     return num_fails
 
 def main():
